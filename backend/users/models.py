@@ -5,7 +5,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-
     username = models.CharField(
         _('username'),
         max_length=150,
@@ -19,26 +18,22 @@ class User(AbstractUser):
             'unique': _("A user with that username already exists."),
         },
     )
-    first_name = models.CharField(_('first name'), max_length=150, blank=True)
-    last_name = models.CharField(_('last name'), max_length=150, blank=True)
 
     email = models.EmailField(
         _('email'),
         max_length=254,
         unique=True,
     )
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
     
 
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
         ordering = ('id',)
-        constraints = [
-            models.UniqueConstraint(
-                fields=['username', 'email'],
-                name='unique_name'
-            ),
-        ]
+
 
     def __str__(self):
         return self.username
