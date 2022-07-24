@@ -2,12 +2,13 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path='infra/.env')
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY', default='123')
 
 DEBUG = os.getenv('DEBUG', default=True)
 
@@ -62,13 +63,13 @@ WSGI_APPLICATION = 'foodgram.wsgi.application'
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.getenv("DB_ENGINE", default="django.db.backends.postgresql"),
-        "NAME": os.getenv("DB_NAME", default="postgres"),
-        "USER": os.getenv("POSTGRES_USER", default="postgres"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="postgres"),
-        "HOST": os.getenv("DB_HOST", default="127.0.0.1"),
-        "PORT": os.getenv("DB_PORT", default="5432"),
+    'default': {
+        'ENGINE': os.getenv('DB_ENGINE', default='django.db.backends.postgresql_psycopg2'),
+        'NAME': os.getenv('DB_NAME', default='postgres'),
+        'USER': os.getenv('POSTGRES_USER', default='postgres'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', default='postgres'),
+        'HOST': os.getenv('DB_HOST', default='localhost'),
+        'PORT': os.getenv('DB_PORT', default='5432'),
     }
 }
 
@@ -100,17 +101,14 @@ USE_L10N = True
 USE_TZ = True
 
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '/var/html/static/')
 
-STATIC_URL = '/backend_static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'backend_static/')
-
-MEDIA_URL = '/backend_media/'
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'backend_media/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '/var/html/media/')
 
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = 'users.User'
 
 
 REST_FRAMEWORK = {
