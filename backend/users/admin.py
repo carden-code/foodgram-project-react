@@ -1,29 +1,13 @@
 from django.contrib import admin
 
-from users.models import Subscription, User
+from users.models import CustomUser  # isort:skip
 
 
-class UserAdmin(admin.ModelAdmin):
-    list_display = (
-        'pk',
-        'username',
-        'first_name',
-        'last_name',
-        'email',
-    )
-    search_fields = ('username', 'email', 'last_name')
-    list_filter = ('username', 'email', 'first_name', 'last_name')
-
-
-class SubscriptionAdmin(admin.ModelAdmin):
-    list_display = (
-        'pk',
-        'user',
-        'author'
-    )
-    list_filter = ('user', 'author')
-    search_fields = ('user__username', 'user__email')
-
-
-admin.site.register(User, UserAdmin)
-admin.site.register(Subscription, SubscriptionAdmin)
+@admin.register(CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
+    """
+    Класс CustomUserAdmin для редактирования
+    модели CustomUser в интерфейсе админ-зоны.
+    """
+    list_dispaly = ('__all__',)
+    search_fields = ('email', 'username')
