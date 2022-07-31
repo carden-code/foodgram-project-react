@@ -51,13 +51,13 @@
    DEBUG=False
 ```
 
-Cборка docker-compose:
+- Cборка docker-compose:
 
 ```bash
     cd infra
     docker-compose up -d --build 
 ```
-Выполните по очереди команды:
+- Выполните по очереди команды:
 
 ```bash
     docker-compose exec backend python manage.py makemigrations
