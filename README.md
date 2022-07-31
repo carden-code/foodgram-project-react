@@ -17,12 +17,7 @@
     git clone git@github.com:carden-code/foodgram-project-react.git
     cd foodgram-project-react
 ```
-Создайте и активируйте виртуальное окружение:
 
-```bash
-python -m venv venv
-source venv/Scripts/activate
-```
 В дериктории проекта создайте файл .env, в котором пропишите следующие переменные окружения (SECRET_KEY нужно взять из settings.py):
 ```python
 DB_ENGINE=django.db.backends.postgresql
@@ -38,6 +33,7 @@ SECRET_KEY=<SECRET_KEY>
 Соберите контейнеры:
 
 ```bash
+    cd infra
     docker-compose up -d --build 
 ```
 Выполните по очереди команды:
@@ -51,3 +47,12 @@ SECRET_KEY=<SECRET_KEY>
 ```
 ____
 Ваш проект запустился на http://localhost/
+
+### Участники:
+
+#### [Борисенко Вячеслав](https://github.com/carden-code "Борисенко Вячеслав")
+
+### Лицензия:
+- Этот проект лицензируется в соответствии с лицензией MIT 
+
+![](https://miro.medium.com/max/156/1*A0rVKDO9tEFamc-Gqt7oEA.png "1")
