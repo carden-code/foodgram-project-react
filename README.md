@@ -18,19 +18,40 @@
     cd foodgram-project-react
 ```
 
-В дериктории проекта создайте файл .env, в котором пропишите следующие переменные окружения (SECRET_KEY нужно взять из settings.py):
-```python
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=postgres
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-DB_HOST=db
-DB_PORT=5432
-DEBUGE=True
-SECRET_KEY=<SECRET_KEY>
+- Переменные окружения:
+
+`cd infra
+`
+
+```echo "SECRET_KEY=YourSecretKey 
+   DB_ENGINE=django.db.backends.postgresql 
+   DB_NAME=postgres 
+   POSTGRES_USER=postgres 
+   POSTGRES_PASSWORD=postgres 
+   DB_HOST=db DB_PORT=5432
+   DEBUG=False" > .env
 ```
 
-Соберите контейнеры:
+- Пример заполнения файла .env:
+
+```DB_ENGINE=django.db.backends.postgresql # указываем, что работаем c postgresql
+
+   DB_NAME=postgres # имя базы данных
+
+   POSTGRES_USER=postgres # логин для подключения к базе данных
+
+   POSTGRES_PASSWORD=postgres # пароль для подключения к БД (установите свой)
+
+   DB_HOST=db # название сервиса (контейнера)
+
+   DB_PORT=5432 # порт для подключения к БД
+
+   SECRET_KEY=ваш секретный ключ
+
+   DEBUG=False
+```
+
+Cборка docker-compose:
 
 ```bash
     cd infra
