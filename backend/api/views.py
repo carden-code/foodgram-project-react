@@ -9,19 +9,19 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from api.filters import IngredientFilter, TagsFilter  # isort:skip
-from api.pagination import RecipePagination  # isort:skip
-from api.permissions import AuthorOrReadOnly  # isort:skip
-from api.serializers import (IngredientSerializer,  # isort:skip
-                             RecipeSerializer, SubscribeSerializer,
-                             SubscribtionSerializer,
-                             SubscriptionRecipesSerializer, TagSerializer)
-from api.util import shopping_cart_pdf  # isort:skip
-from backend.settings import FILENAME  # isort:skip
-from recipes.models import (FavoriteList, Ingredient,  # isort:skip
-                            IngredientInRecipe, Recipe,
-                            ShoppingCart, Subscription, Tag)
-from users.models import CustomUser  # isort:skip
+from api.filters import IngredientFilter, TagsFilter # isort: skip
+from api.pagination import RecipePagination # isort: skip
+from api.permissions import AuthorOrReadOnly # isort: skip
+from recipes.models import Tag # isort: skip
+from recipes.models import (FavoriteList, Ingredient, IngredientInRecipe,
+                            Recipe, ShoppingCart, Subscription)
+from api.serializers import TagSerializer # isort: skip
+from api.serializers import (IngredientSerializer, RecipeSerializer,
+                             SubscribeSerializer, SubscribtionSerializer,
+                             SubscriptionRecipesSerializer) # isort: skip
+from api.util import shopping_cart_pdf # isort: skip
+from backend.settings import FILENAME # isort: skip
+from users.models import CustomUser # isort: skip
 
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
@@ -62,9 +62,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-    def perform_update(self, serializer):
-        serializer.save(author=self.request.user)
-
     @action(
         detail=True,
         methods=('post', 'delete'),
@@ -77,8 +74,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         """
         if request.method == 'POST':
             return self.add_recipe(FavoriteList, request, pk)
-        else:
-            return self.delete_recipe(FavoriteList, request, pk)
+        return self.delete_recipe(FavoriteList, request, pk)
 
     @action(
         detail=True,
@@ -92,8 +88,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         """
         if request.method == 'POST':
             return self.add_recipe(ShoppingCart, request, pk)
-        else:
-            return self.delete_recipe(ShoppingCart, request, pk)
+        return self.delete_recipe(ShoppingCart, request, pk)
 
     @action(
         detail=False,
@@ -160,8 +155,7 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
     pagination_class = RecipePagination
 
     def get_queryset(self):
-        user = self.request.user
-        return Subscription.objects.filter(user=user)
+        return Subscription.follower
 
 
 class SubscribeViewSet(viewsets.ModelViewSet):

@@ -143,6 +143,7 @@ DJOSER = {
     }
 }
 
+PAGE_SIZE = 6
 COOKING_TIME_RECIPE = 1
 AMOUNT_INGREDIENT = 1
 FILENAME = 'shopping_cart'
