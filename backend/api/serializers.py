@@ -2,15 +2,15 @@ from django.core.validators import MinValueValidator
 from django.db import transaction
 from django.shortcuts import get_object_or_404
 from drf_extra_fields.fields import Base64ImageField
-from recipes.models import (FavoriteList, Ingredient,  # isort:skip
-                            IngredientInRecipe, Recipe, ShoppingCart,
-                            Subscription, Tag)
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 
-from backend.settings import AMOUNT_INGREDIENT, COOKING_TIME_RECIPE  # isort:skip
-from users.models import CustomUser  # isort:skip
-from users.serializers import CurrentCustomUserSerializer  # isort:skip
+from backend.settings import AMOUNT_INGREDIENT, COOKING_TIME_RECIPE
+from recipes.models import (FavoriteList, Ingredient,
+                            IngredientInRecipe, Recipe, ShoppingCart,
+                            Subscription, Tag)
+from users.models import CustomUser
+from users.serializers import CurrentCustomUserSerializer
 
 
 class AuthorSerializer(serializers.ModelSerializer):

@@ -9,19 +9,19 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
-from api.filters import IngredientFilter, TagsFilter # isort: skip
-from api.pagination import RecipePagination # isort: skip
-from api.permissions import AuthorOrReadOnly # isort: skip
-from recipes.models import Tag # isort: skip
-from recipes.models import (FavoriteList, Ingredient, IngredientInRecipe,
-                            Recipe, ShoppingCart, Subscription)
-from api.serializers import TagSerializer # isort: skip
+from api.filters import IngredientFilter, TagsFilter
+from api.pagination import RecipePagination
+from api.permissions import AuthorOrReadOnly
+from api.serializers import TagSerializer
 from api.serializers import (IngredientSerializer, RecipeSerializer,
                              SubscribeSerializer, SubscribtionSerializer,
-                             SubscriptionRecipesSerializer) # isort: skip
-from api.util import shopping_cart_pdf # isort: skip
-from backend.settings import FILENAME # isort: skip
-from users.models import CustomUser # isort: skip
+                             SubscriptionRecipesSerializer)
+from api.util import shopping_cart_pdf
+from backend.settings import FILENAME
+from recipes.models import Tag
+from recipes.models import (FavoriteList, Ingredient, IngredientInRecipe,
+                            Recipe, ShoppingCart, Subscription)
+from users.models import CustomUser
 
 
 class IngredientViewSet(viewsets.ReadOnlyModelViewSet):
