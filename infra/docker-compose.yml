@@ -38,9 +38,7 @@ services:
       - frontend
 
   frontend:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: borisenkov89/frontend:v1.08.2022
     volumes:
       - ../frontend/:/app/result_build/
 

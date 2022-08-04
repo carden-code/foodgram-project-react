@@ -47,7 +47,7 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2 
         with:
-          context: foodgram
+          context: backend
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/foodgram:v1.08.2022
 
@@ -66,6 +66,7 @@ jobs:
             sudo docker-compose stop
             sudo docker-compose rm backend
             touch .env
+            echo DEBUG=${{ secrets.DEBUG }} >> .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
             echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
