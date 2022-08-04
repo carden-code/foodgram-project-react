@@ -10,9 +10,7 @@ services:
       - ./.env
 
   backend:
-    build:
-      context: 
-        ../backend
+    image: borisenkov89/foodgram:v1.08.2022
     expose:
       - 8000
     restart: always
