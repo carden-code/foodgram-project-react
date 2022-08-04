@@ -49,7 +49,7 @@ jobs:
         with:
           context: foodgram
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/yamdb:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram:latest
 
   deploy:
     runs-on: ubuntu-latest
