@@ -12,15 +12,13 @@ from rest_framework.response import Response
 from api.filters import IngredientFilter, TagsFilter
 from api.pagination import RecipePagination
 from api.permissions import AuthorOrReadOnly
-from api.serializers import TagSerializer
 from api.serializers import (IngredientSerializer, RecipeSerializer,
-                             SubscribeSerializer, SubscribtionSerializer,
-                             SubscriptionRecipesSerializer)
+                          SubscribeSerializer, SubscribtionSerializer,
+                          SubscriptionRecipesSerializer, TagSerializer)
 from api.util import shopping_cart_pdf
 from backend.settings import FILENAME
-from recipes.models import Tag
 from recipes.models import (FavoriteList, Ingredient, IngredientInRecipe,
-                            Recipe, ShoppingCart, Subscription)
+                            Recipe, ShoppingCart, Subscription, Tag)
 from users.models import CustomUser
 
 
@@ -155,7 +153,8 @@ class SubscriptionViewSet(viewsets.ModelViewSet):
     pagination_class = RecipePagination
 
     def get_queryset(self):
-        return Subscription.follower
+        user = self.request.user
+        return user.follower.all()
 
 
 class SubscribeViewSet(viewsets.ModelViewSet):
