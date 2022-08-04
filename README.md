@@ -1,4 +1,4 @@
-![example workflow](https://github.com/carden-code/foodgram-project/actions/workflows/main.yml/badge.svg)
+![example workflow](https://github.com/carden-code/foodgram-project-react/actions/workflows/main.yml/badge.svg)
 
 # Сайт Foodgram, «Продуктовый помощник»
  Проект Foodgram позволяет пользователем публиковать свои рецепты, подписываться на публикации других пользователей, добавлять понравившиеся рецепты в список «Избранное», а перед походом в магазин скачивать сводный список продуктов, необходимых для приготовления одного или нескольких выбранных блюд.
