@@ -11,7 +11,7 @@ class IngredientInRecipeInline(admin.TabularInline):
     модель IngredientInRecipe на той же странице, что и модель Recipe.
     """
     model = IngredientInRecipe
-    # extra = 1
+    extra = 1
     min_num = 1
 
 
@@ -52,7 +52,7 @@ class RecipeAdmin(admin.ModelAdmin):
     Класс RecipeAdmin для редактирования
     модели Recipe в  интерфейсе админ-зоны.
     """
-    inlines = (IngredientInRecipeInline,)
+    inlines = (IngredientInRecipeInline, )
     list_display = ('author', 'name', 'count_favorite')
     list_filter = ('author', 'tags')
     search_fields = ('name', 'author__username')
