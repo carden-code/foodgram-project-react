@@ -242,7 +242,6 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         """Валидация ингредиентов и количества."""
-         
         ingredients = data.get('ingredients')
         if ingredients is None:
             ingredients = self.initial_data.get('ingredients')
