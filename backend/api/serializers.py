@@ -251,7 +251,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                 'Не переданы ингредиенты.'
             )
 
-        ingredients = data.get('ingredientinrecipe')
+        ingredients = data.get('ingredients')
         ingredient_list = []
         for ingredient in ingredients:
             ingredient_item = get_object_or_404(
