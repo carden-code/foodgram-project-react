@@ -259,7 +259,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                     {'ingredients': 'Минимальное количество ингредиента: 1'}
                 )
 
-            if ingredient in ingredient_list:
+            if id in ingredient_list:
                 raise serializers.ValidationError(
                     {'ingredients': 'Такой ингредиент уже выбран'}
                 )
