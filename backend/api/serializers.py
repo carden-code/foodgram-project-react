@@ -239,12 +239,14 @@ class RecipeSerializer(serializers.ModelSerializer):
 
         instance.refresh_from_db()
         return instance
+    
+    
 
     def validate(self, data):
         """Валидация ингредиентов и количества."""
-        ingredients = data.get('ingredients')
+        ingredients = data.get('ingredientinrecipe')
         if ingredients is None:
-            ingredients = self.initial_data.get('ingredients')
+            ingredients = self.initial_data.get('ingredientinrecipe')
         if ingredients is None:
             raise serializers.ValidationError(
                 {'ingredients': 'Ingredients обязательное поле'}
@@ -252,14 +254,18 @@ class RecipeSerializer(serializers.ModelSerializer):
 
         ingredient_list = []
         for ingredient in ingredients:
-            ingredient_item = get_object_or_404(
-                Ingredient, id=ingredient['id']
-            )
-            if ingredient_item in ingredient_list:
+            id = ingredient['id']
+            amount = ingredient['amount']
+            if amount <= 0:
                 raise serializers.ValidationError(
-                    {'ingredients': ['Такой ингредиент уже выбран']}
+                    {'ingredients': 'Минимальное количество ингредиента: 1'}
                 )
-            ingredient_list.append(ingredient_item)
+
+            if ingredient in ingredient_list:
+                raise serializers.ValidationError(
+                    {'ingredients': 'Такой ингредиент уже выбран'}
+                )
+            ingredient_list.append(id)
 
         return data
 
