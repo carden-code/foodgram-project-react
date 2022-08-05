@@ -253,18 +253,20 @@ class RecipeSerializer(serializers.ModelSerializer):
             )
 
         ingredients = data['ingredients']
-        ingredients_list = []
+        ingredient_list = []
 
         for ingredient in ingredients:
-            ingredient_id = ingredient['id']
-            if ingredient_id in ingredients_list:
+            ingredient_item = get_object_or_404(
+                Ingredient, id=ingredient['id']
+            )
+            if ingredient_item in ingredient_list:
                 raise serializers.ValidationError(
                     {'ingredients': ['Такой ингредиент уже выбран']}
                 )
-            ingredients_list.append(ingredient_id)
+            ingredient_list.append(ingredient_item)
 
             amount = int(ingredient['amount'])
-            if amount < 0:
+            if amount <= 0:
                 raise serializers.ValidationError(
                     {'amount': ['Количество не может быть менее 1.']}
                 )
