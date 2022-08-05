@@ -11,8 +11,8 @@ class IngredientInRecipeInline(admin.TabularInline):
     модель IngredientInRecipe на той же странице, что и модель Recipe.
     """
     model = IngredientInRecipe
-    extra = 1
     min_num = 1
+    extra = 0
 
 
 class IngredientInRecipeAdmin(admin.ModelAdmin):
