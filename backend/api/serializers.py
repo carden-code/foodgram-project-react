@@ -247,7 +247,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             ingredients = self.initial_data.get('ingredientinrecipe')
         if ingredients is None:
             raise serializers.ValidationError(
-                {'ingredients': 'Ingredients обязательное поле'}
+                'Ingredients обязательное поле'
             )
 
         ingredient_list = []
@@ -256,12 +256,12 @@ class RecipeSerializer(serializers.ModelSerializer):
             amount = ingredient['amount']
             if amount <= 0:
                 raise serializers.ValidationError(
-                    {'ingredients': 'Минимальное количество ингредиента: 1'}
+                    'Минимальное количество ингредиента: 1'
                 )
 
             if id in ingredient_list:
                 raise serializers.ValidationError(
-                    {'ingredients': 'Такой ингредиент уже выбран'}
+                    'Такой ингредиент уже выбран'
                 )
             ingredient_list.append(id)
 
