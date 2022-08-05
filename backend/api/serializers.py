@@ -250,18 +250,22 @@ class RecipeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Не переданы ингредиенты.'
             )
+        if 'ingredientinrecipe' in data:
+            ingredients = data.get('ingredientinrecipe')
+            uniq_ingredients = set()
+            for ingredient in ingredients:
+                id = ingredient['id']
+                amount = ingredient['amount']
+                if amount <= 0:
+                    raise serializers.ValidationError(
+                        'Минимальное количество ингредиента: 1'
+                    )
+                uniq_ingredients.add(id)
 
-        ingredients = data.get('ingredientinrecipe')
-        ingredient_list = []
-        for ingredient in ingredients:
-            ingredient_item = get_object_or_404(
-                Ingredient, id=ingredient['id']
-            )
-            if ingredient_item in ingredient_list:
+            if len(uniq_ingredients) != len(ingredients):
                 raise serializers.ValidationError(
-                    'Такой ингредиент уже выбран'
+                    'Ингридиенты должны быть уникальными.'
                 )
-            ingredient_list.append(ingredient_item)
         return data
 
 
