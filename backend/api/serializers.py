@@ -252,7 +252,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                 {'ingredients': ['Не переданы ингредиенты.']}
             )
 
-        ingredients = data['ingredients']
+        ingredients = data['ingredientinrecipe']
         ingredient_list = []
 
         for ingredient in ingredients:
