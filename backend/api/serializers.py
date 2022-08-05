@@ -239,7 +239,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
         instance.refresh_from_db()
         return instance
-    
+
     def validate(self, data):
         """Валидация ингредиентов и количества."""
         ingredients = data.get('ingredientinrecipe')
