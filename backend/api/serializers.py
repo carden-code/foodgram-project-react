@@ -1,4 +1,3 @@
-from email.mime import image
 from django.core.validators import MinValueValidator
 from django.db import transaction
 from django.shortcuts import get_object_or_404
