@@ -1,3 +1,4 @@
+from email.mime import image
 from django.core.validators import MinValueValidator
 from django.db import transaction
 from django.shortcuts import get_object_or_404
@@ -203,7 +204,7 @@ class RecipeSerializer(serializers.ModelSerializer):
         Метод `get_is_in_shopping_cart` проверяет
         наличие рецепта в списке покупок.
         """
-        request = self.context['request']
+        request = self.context.get('request')
         if request.user.is_anonymous:
             return False
         return ShoppingCart.objects.filter(
@@ -238,7 +239,7 @@ class RecipeSerializer(serializers.ModelSerializer):
             ingredients=ingredients, recipe=instance)
 
         instance.refresh_from_db()
-        return instance
+        return super().update(instance=instance, validated_data=validated_data)
 
     def validate(self, data):
         """Валидация ингредиентов и количества."""
